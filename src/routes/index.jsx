@@ -5,7 +5,12 @@ import { Home } from '../pages/Home';
 
 function PrivateRoute({ children }) {
   const { signed } = useAuth();
-  return signed ? children : <Navigate to="/login" replace />;
+  
+  if (!signed) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
 }
 
 export function AppRoutes() {
