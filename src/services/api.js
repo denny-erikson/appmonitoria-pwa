@@ -26,4 +26,16 @@ export const LOGIN_MUTATION = gql`
       token
     }
   }
+`;
+
+export const GET_EVENTS = gql`
+  query GetEvents {
+    allEvents {
+      daily
+      endDate
+      id
+      name
+      startDate
+    }
+  }
 `; 

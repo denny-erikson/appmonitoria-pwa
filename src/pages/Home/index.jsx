@@ -1,4 +1,5 @@
 import { useAuth } from '../../contexts/AuthContext';
+import { EventList } from '../../components/EventList';
 import {
   Container,
   Header,
@@ -22,7 +23,7 @@ export function Home() {
   return (
     <Container>
       <Header>
-        <Logo>Monitoria App</Logo>
+        <Logo>Meu App</Logo>
         <UserInfo>
           <UserName>Olá, {user?.username || 'Usuário'}!</UserName>
           <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
@@ -31,15 +32,13 @@ export function Home() {
 
       <Content>
         <WelcomeCard>
-          <h2>Bem-vindo ao Monitoria App</h2>
-          <h4>Dashboard</h4>
+          <h2>Seus Eventos</h2>
           <p>
-            Este é seu painel de controle. Aqui você pode gerenciar todas as suas
-            informações e acessar as funcionalidades do sistema.
+            Aqui está a lista de todos os seus eventos cadastrados no sistema.
           </p>
         </WelcomeCard>
 
-        {/* Aqui você pode adicionar mais conteúdo, como cards, tabelas, etc. */}
+        <EventList />
       </Content>
     </Container>
   );

@@ -1,4 +1,5 @@
 import { AuthProvider } from './contexts/AuthContext';
+import { EventProvider } from './contexts/EventContext';
 import { AppRoutes } from './routes';
 import { GlobalStyle } from './styles/global';
 import { ApolloProvider } from '@apollo/client';
@@ -8,8 +9,10 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <AuthProvider>
-        <GlobalStyle />
-        <AppRoutes />
+        <EventProvider>
+          <GlobalStyle />
+          <AppRoutes />
+        </EventProvider>
       </AuthProvider>
     </ApolloProvider>
   );
