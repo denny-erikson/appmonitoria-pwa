@@ -20,8 +20,10 @@ import {
   PaginationInfo,
   PaginationControls,
   PaginationButton,
-  VirtualizedListContainer
+  VirtualizedListContainer,
+  EventDaily
 } from './styles';
+import { useNavigate } from 'react-router-dom';
 
 export function EventList() {
   const { 
@@ -38,6 +40,7 @@ export function EventList() {
   } = useEvents();
 
   const [searchTimeout, setSearchTimeout] = useState(null);
+  const navigate = useNavigate();
 
   const handleSearch = (value) => {
     // Debounce para a busca
@@ -81,6 +84,10 @@ export function EventList() {
 
   const isItemLoaded = (index) => !hasNextPage || index < events.length;
 
+  const handleEventClick = (eventId) => {
+    navigate(`/event/${eventId}`);
+  };
+
   const Item = ({ index, style }) => {
     if (!isItemLoaded(index)) {
       return (
@@ -93,11 +100,14 @@ export function EventList() {
     const event = events[index];
     return (
       <div style={style}>
-        <EventCard>
+        <EventCard onClick={() => handleEventClick(event.id)}>
           <EventTitle>{event.name}</EventTitle>
           <EventDate>
             De {formatDate(event.startDate)} até {formatDate(event.endDate)}
           </EventDate>
+          <EventDaily daily={event.daily}>
+            {event.daily ? 'Diário' : 'Não Diário'}
+          </EventDaily>
         </EventCard>
       </div>
     );

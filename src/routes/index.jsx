@@ -2,27 +2,18 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Login } from '../pages/Login';
 import { Home } from '../pages/Home';
+import { EventDetails } from '../pages/EventDetails';
 
 function PrivateRoute({ children }) {
   const { signed } = useAuth();
-  
-  if (!signed) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return children;
+  return signed ? children : <Navigate to="/login" replace />;
 }
 
 export function AppRoutes() {
-  const { signed } = useAuth();
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route 
-          path="/login" 
-          element={signed ? <Navigate to="/" replace /> : <Login />} 
-        />
+        <Route path="/login" element={<Login />} />
         <Route
           path="/"
           element={
@@ -31,7 +22,14 @@ export function AppRoutes() {
             </PrivateRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route
+          path="/event/:id"
+          element={
+            <PrivateRoute>
+              <EventDetails />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

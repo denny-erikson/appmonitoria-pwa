@@ -55,4 +55,17 @@ export const GET_EVENTS = gql`
       hasNextPage
     }
   }
+`;
+
+export const GET_EVENT_DETAILS = gql`
+  query GetEventDetails($id: ID!) {
+    eventById(id: $id) {
+      id
+      name
+      startDate
+      endDate
+      daily
+    }
+  }
 `; 
+
