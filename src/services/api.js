@@ -29,13 +29,30 @@ export const LOGIN_MUTATION = gql`
 `;
 
 export const GET_EVENTS = gql`
-  query GetEvents {
-    allEvents {
-      daily
-      endDate
-      id
-      name
-      startDate
+  query GetEventsPagination(
+    $offset: Int
+    $limit: Int
+    $name: String
+    $startDate: String
+    $endDate: String
+    $orderBy: String
+  ) {
+    allEvents(
+      offset: $offset
+      limit: $limit
+      name: $name
+      startDate: $startDate
+      endDate: $endDate
+      orderBy: $orderBy
+    ) {
+      items {
+        id
+        name
+        startDate
+        endDate
+      }
+      totalCount
+      hasNextPage
     }
   }
 `; 

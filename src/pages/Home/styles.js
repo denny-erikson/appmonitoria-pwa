@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  min-height: 100vh;
-  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 `;
 
 export const Header = styled.header`
@@ -45,9 +46,11 @@ export const LogoutButton = styled.button`
 `;
 
 export const Content = styled.main`
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 2rem;
+  flex: 1;
+  padding: 2rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const WelcomeCard = styled.div`
