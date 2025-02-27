@@ -65,6 +65,18 @@ export const GET_EVENT_DETAILS = gql`
       startDate
       endDate
       daily
+      ratingsByEvent {
+        id
+        profile {
+          id
+          name
+          ratingStats
+          ratings {
+            score
+            scoreDisplay
+          }
+        }
+      }
     }
   }
 `; 

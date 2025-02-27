@@ -13,6 +13,7 @@ import {
   InfoItem,
   BackButton,
 } from './styles';
+import { RatingsList } from '../../components/RatingsList';
 
 export function EventDetails() {
   const { id } = useParams();
@@ -28,13 +29,22 @@ export function EventDetails() {
         const { data } = await client.query({
           query: GET_EVENT_DETAILS,
           variables: { id },
+          fetchPolicy: 'network-only' // Força uma nova requisição
         });
         
-        // Aqui está a correção: usando eventById em vez de event
-        setEvent(data.eventById);
+        console.log('Resposta da API:', data); // Para debug
+        
+        if (data && data.eventById) {
+          setEvent(data.eventById);
+        } else {
+          setError('Dados do evento não encontrados');
+        }
       } catch (err) {
-        console.error('Erro ao buscar detalhes do evento:', err);
-        setError('Não foi possível carregar os detalhes do evento.');
+        console.error('Erro completo:', err); // Para debug
+        setError(
+          err.graphQLErrors?.[0]?.message || 
+          'Não foi possível carregar os detalhes do evento.'
+        );
       } finally {
         setLoading(false);
       }
@@ -120,6 +130,8 @@ export function EventDetails() {
               <p>{event.description}</p>
             </InfoItem>
           )}
+
+          <RatingsList ratings={event.ratingsByEvent} />
         </EventCard>
       </Content>
     </Container>
