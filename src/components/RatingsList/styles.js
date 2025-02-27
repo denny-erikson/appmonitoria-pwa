@@ -34,14 +34,20 @@ export const ProfileName = styled.h3`
 export const ScoreDisplay = styled.span`
   background: ${props => {
     const score = parseInt(props.$score.split('_')[1]);
-    if (score >= 4) return '#4CAF50';
-    if (score >= 3) return '#FFC107';
-    return '#F44336';
+    if (score >= 4) return '#98D8A0';
+    if (score >= 3) return '#FFE5B4';
+    return '#FFB6B6';
   }};
-  color: white;
+  color: ${props => {
+    const score = parseInt(props.$score.split('_')[1]);
+    if (score >= 4) return '#2E7D32';    // Verde escuro
+    if (score >= 3) return '#B7860B';    // Amarelo escuro
+    return '#C62828';                     // Vermelho escuro
+  }};
   padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.9rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;

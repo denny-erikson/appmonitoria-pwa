@@ -10,7 +10,7 @@ export const HeaderContainer = styled.header`
 `;
 
 export const Logo = styled.h1`
-  color: #0066cc;
+  color: #f44336;
   font-size: 1.5rem;
   cursor: pointer;
 `;
