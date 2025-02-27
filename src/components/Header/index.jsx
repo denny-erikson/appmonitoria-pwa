@@ -24,7 +24,7 @@ export function Header() {  // Certifique-se que está sendo exportado
 
   return (
     <HeaderContainer>
-      <Logo onClick={handleLogoClick}>Meu App</Logo>
+      <Logo onClick={handleLogoClick}>MonitoriaApp</Logo>
       <UserInfo>
         <UserName>Olá, {user?.username || 'Usuário'}!</UserName>
         <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
