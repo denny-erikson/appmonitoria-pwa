@@ -67,6 +67,8 @@ export const GET_EVENT_DETAILS = gql`
       daily
       ratingsByEvent {
         id
+        score
+        description
         profile {
           id
           name

@@ -2,12 +2,17 @@ import {
   RatingsContainer,
   RatingCard,
   RatingHeader,
+  ProfileInfo,
   ProfileName,
   ScoreDisplay,
   RatingStats,
   RatingValue,
   RatingCount,
-  NoRatings
+  NoRatings,
+  EventRating,
+  Description,
+  RatingHistory,
+  HistoryTitle
 } from './styles';
 import { StarRating } from '../StarRating';
 
@@ -29,6 +34,10 @@ export function RatingsList({ ratings }) {
     }
   };
 
+  const getScoreNumber = (score) => {
+    return parseInt(score.split('_')[1]);
+  };
+
   return (
     <RatingsContainer>
       <h2>Avaliações ({ratings.length})</h2>
@@ -39,20 +48,38 @@ export function RatingsList({ ratings }) {
         return (
           <RatingCard key={rating.id}>
             <RatingHeader>
-              <ProfileName>{rating.profile.name}</ProfileName>
-              {rating.profile.ratings?.map((r, index) => (
-                <ScoreDisplay key={index} $score={r.score}>
-                  {r.scoreDisplay}
-                </ScoreDisplay>
-              ))}
+              <ProfileInfo>
+                <ProfileName>{rating.profile.name}</ProfileName>
+                <StarRating rating={getScoreNumber(rating.score)} />
+              </ProfileInfo>
+              <ScoreDisplay $score={rating.score}>
+                {getScoreNumber(rating.score)}/5
+              </ScoreDisplay>
             </RatingHeader>
+
+            <EventRating>
+              {rating.description && (
+                <Description>"{rating.description}"</Description>
+              )}
+            </EventRating>
+
             {stats && (
-              <RatingStats>
-                Média geral:
-                <RatingValue>{stats.average.toFixed(1)}</RatingValue>
-                <StarRating rating={stats.average} />
-                <RatingCount>({stats.total} avaliações)</RatingCount>
-              </RatingStats>
+              <>
+                <RatingStats>
+                  <RatingValue>Média geral: {stats.average.toFixed(1)}</RatingValue>
+                  <StarRating rating={stats.average} />
+                  <RatingCount>({stats.total} avaliações)</RatingCount>
+                </RatingStats>
+
+                <RatingHistory>
+                  <HistoryTitle>Histórico de avaliações:</HistoryTitle>
+                  {rating.profile.ratings.map((r, index) => (
+                    <ScoreDisplay key={index} $score={r.score}>
+                      {r.scoreDisplay}
+                    </ScoreDisplay>
+                  ))}
+                </RatingHistory>
+              </>
             )}
           </RatingCard>
         );
