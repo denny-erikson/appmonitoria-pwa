@@ -7,7 +7,7 @@ import {
   UserName,
   LogoutButton
 } from './styles';
-
+import Navigation from '../Navigation';
 export function Header() {  // Certifique-se que está sendo exportado
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -25,6 +25,7 @@ export function Header() {  // Certifique-se que está sendo exportado
   return (
     <HeaderContainer>
       <Logo onClick={handleLogoClick}>MonitoriaApp</Logo>
+      <Navigation />
       <UserInfo>
         <UserName>Olá, {user?.username || 'Usuário'}!</UserName>
         <LogoutButton onClick={handleLogout}>Sair</LogoutButton>

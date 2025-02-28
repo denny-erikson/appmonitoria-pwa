@@ -4,7 +4,6 @@ import { Login } from '../pages/Login';
 import { Home } from '../pages/Home';
 import { EventDetails } from '../pages/EventDetails';
 import CreateTeamView from '../views/CreateTeam';
-import Navigation from '../components/Navigation';
 function PrivateRoute({ children }) {
   const { signed } = useAuth();
   return signed ? children : <Navigate to="/login" replace />;
@@ -12,8 +11,7 @@ function PrivateRoute({ children }) {
 
 export function AppRoutes() {
   return (
-    <BrowserRouter>
-      <Navigation />
+    <BrowserRouter>      
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route
