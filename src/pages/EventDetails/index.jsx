@@ -14,6 +14,7 @@ import {
   BackButton,
 } from './styles';
 import { RatingsList } from '../../components/RatingsList';
+import { Link } from 'react-router-dom';
 
 export function EventDetails() {
   const { id } = useParams();
@@ -103,6 +104,7 @@ export function EventDetails() {
                 {event.status === 'active' ? 'Ativo' : 'Inativo'}
               </EventStatus>
             </div>
+            <Link to={`/event/${id}/team`}>Detalhes do Time </Link>
           </EventHeader>
 
           <EventInfo>
